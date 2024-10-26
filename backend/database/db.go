@@ -2,6 +2,7 @@ package database
 
 import (
 	"clientapp/config"
+	"clientapp/models"
 	"fmt"
 	"log"
 
@@ -21,6 +22,7 @@ func ConnectDB() {
 		config.Vars.DBPort,
 		config.Vars.DBHost,
 	)
+
 	var err error
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
