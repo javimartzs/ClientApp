@@ -1,7 +1,9 @@
-# Cargamos las variables del fichero .env
-include .env
-export $(shell sed 's/=.*//' .env)
-
+# Cargar las variables del archivo .env
+# Cargar las variables del archivo .env usando export
+ifneq (,$(wildcard .env))
+	include .env
+	export $(shell sed 's/=.*//' .env)
+endif
 
 # Variables de la aplicacion
 
@@ -9,11 +11,11 @@ export $(shell sed 's/=.*//' .env)
 # Comando para levantar Postgres en Docker
 start-db:
 	@echo "Iniciando Postgres en Docker..."
-	@docker run --name $(DB_CONTAINER_NAME) \ 
-	-e POSTGRES_USER = $(DB_USER) \ 
-	-e POSTGRES_PASSWORD = $(DB_PASS) \ 
-	-e POSTGRES_DB = $(DB_NAME) \ 
-	-p $(DB_PORT):5432 \ 
+	@docker run --name $(DB_CONTAINER_NAME) \
+	-e POSTGRES_USER=$(DB_USER) \
+	-e POSTGRES_PASSWORD=$(DB_PASS) \
+	-e POSTGRES_DB=$(DB_NAME) \
+	-p $(DB_PORT):5432 \
 	-d $(DB_IMAGE) 
 
 # Comando para detener y eliminar el contenedor de postgres
