@@ -1,9 +1,7 @@
 # Cargar las variables del archivo .env
 # Cargar las variables del archivo .env usando export
-ifneq (,$(wildcard .env))
-	include .env
-	export $(shell sed 's/=.*//' .env)
-endif
+include .env
+export $(shell sed 's/=.*//' .env)
 
 # Variables de la aplicacion
 
